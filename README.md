@@ -10,6 +10,6 @@ Chatterdog is a Flask application enabled via the PaLM API from Google and consu
 
 ## Relevant Links
 
-PaLM API Docs - https://developers.generativeai.google/tutorials/text_quickstart
-Flask Docs - https://flask.palletsprojects.com/en/2.3.x/quickstart/
+- PaLM API Docs - https://developers.generativeai.google/tutorials/text_quickstart
+- Flask Docs - https://flask.palletsprojects.com/en/2.3.x/quickstart/
 
