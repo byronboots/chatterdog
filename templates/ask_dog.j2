@@ -54,28 +54,13 @@
         </ul>
     </nav>
 
-{% block content %}
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <h1>Ask dog a question</h1>
-                <hr>
-                <div id="question-container">
-                    <div id="chat-messages">
-                        <!-- Display the chat messages here -->
-                        {% if response %}
-                            <div class="response">
-                                <p>{{ response }}</p>
-                                <button id="ask-another-button">Ask Another Question</button>
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div id="input-container">
-                        <input type="text" id="user-input" placeholder="Type your message...">
-                        <button id="send-button">Send</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="ask">
+        <form id="Ask_Dog" action="/askdog" method="post">
+            <legend><strong>Ask dog a question</strong></legend>
+            <fieldset>
+                <input type="text" id="user-input" placeholder="Type your message...">
+            <button id="send-button">Send</button>
+            </fieldset>
+            
+        </form>
     </div>
-{% endblock %}
