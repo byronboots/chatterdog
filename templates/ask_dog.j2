@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatterDog</title>
     <style>
         body {
@@ -11,7 +13,7 @@
             height: 100vh;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
         }
         
         nav {
@@ -43,23 +45,85 @@
             background-color: #333;
             color: #fff;
         }
+        
+        #question-answer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        #question-answer form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        #question-answer input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+        }
+        
+        #question-answer button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        #question-answer button:hover {
+            background-color: #555;
+        }
+        
+        #answer-container {
+            background-color: #eee; /* Add your preferred background color */
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            display: none; /* Hide by default */
+            margin-top: 20px;
+        }
+        
+        #answer-container strong {
+            color: #333;
+        }
     </style>
 </head>
 <body>
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="askdog">Ask a Dog</a></li>
-            <li><a href="chatdog">Chat with a Dog</a></li>
+            <li><a href="/askdog">Ask a Dog</a></li>
+            <li><a href="/chatdog">Chat with a Dog</a></li>
         </ul>
     </nav>
 
-    <div id="ask">
-        <form id="Ask_Dog" action="/askdog" method="post">
-            <legend><strong>Ask dog a question</strong></legend>
+    <div id="question-answer">
+        <form id="question" action="/askdog" method="post">
+            <legend><strong>Ask a Dog a Question</strong></legend>
             <fieldset>
-                <input type="text" id="user-input" placeholder="Type your message...">
-            <button id="send-button">Send</button>
+                <input type="text" id="question" name="question" placeholder="Type your question...">
+                <button id="send-button">Send</button>
             </fieldset>
         </form>
+
+        <div id="answer-container">
+            {% if prompt and results %}
+                <strong>Your Question:</strong> {{ prompt }}<br>
+                <strong>Answer:</strong> {{ results }}
+            {% endif %}
+        </div>
     </div>
+
+    <script>
+        // Show the answer section when a question has been asked and answered
+        var answerContainer = document.getElementById('answer-container');
+        {% if prompt and results %}
+            answerContainer.style.display = 'block';
+        {% endif %}
+    </script>
+</body>
+</html>

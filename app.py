@@ -18,7 +18,9 @@ def AskDog():
         return render_template("ask_dog.j2")
     
     if request.method == "POST":
-        if request.form.get("Ask_Dog"):
+        if request.form.get("question"):
+            question = request.form["question"]
+            
             palm.configure(api_key=os.environ["PALM_KEY"])
 
             models = [m for m in palm.list_models() if 'generateText' in m.supported_generation_methods]
@@ -28,12 +30,10 @@ def AskDog():
             # "You're probably also wondering why dogs are better than cats:"
 
             prompt_lead = """Answer all questions starting with "WOOF". 
-            Then answer the question intelligently while acting like a dog. 
+            Then tell the story like a dog would. 
             """
 
-            user_input = request.form["user_input"]
-
-            prompt = prompt_lead + " " + user_input
+            prompt = prompt_lead + " " + question
 
             completion = palm.generate_text(
                 model=model,
@@ -45,8 +45,8 @@ def AskDog():
 
             results = completion.result
             
-            print(completion.result)
-            return render_template("ask_dog.j2", results=results )
+            # print(completion.result)
+            return render_template("ask_dog.j2", results=results, prompt=question)
 
 @app.route('/chatdog')
 def chatdog():

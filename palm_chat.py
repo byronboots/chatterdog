@@ -7,7 +7,7 @@ def DogChat():
         palm.configure(api_key=os.environ["PALM_KEY"])
         if chat_count == 10:
             user_input = input("Your message: ")
-            response = palm.chat(context='Be a happy dog who is just overjoyed to be talking', messages=user_input)
+            response = palm.chat(context='You are a happy dog who is just overjoyed to be talking', messages=user_input)
         else:  
             response = response.reply(input("Your message: "))
 
