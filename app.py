@@ -45,6 +45,9 @@ def AskDog():
 
             results = completion.result
             
+            if results is None:
+                results = "Hmmm, I'm not so great with knowing facts, I could tell you a story though! WOOF!"
+            
             # print(completion.result)
             return render_template("ask_dog.j2", results=results, prompt=question)
 
