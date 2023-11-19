@@ -1,44 +1,145 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>{% block title %}{% endblock %}</title>
+    <style>
+        body {
+            background-color: #343a40; /* Dark background color */
+            color: white; /* Text color */
+        }
+        .navbar {
+            background-color: #343a40; /* Dark background color for the navbar */
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .img-container {
+            text-align: center; /* Center the image */
+        }
+        .img-container img {
+            max-width: 100%; /* Make the image responsive */
+            max-height: 55vh; /* Set the maximum height to 80% of the viewport height */
+            margin: auto; /* Center the image vertically */
+            display: block;
+        }
+        .text-container {
+            text-align: center; /* Center the text */
+            margin-top: 20px; /* Add some space between the image and text */
+            font-size: 2em;
+        }
+        #question-answer {
+            margin-top: 20px;
+            text-align: center; /* Center the form and answer container */
+            border: 2px solid white;
+            padding: 5px;
+        }
+        #answer-container {
+            margin-top: 20px; /* Add space between the question and answer */
+            text-align: center; /* Center the answer text */
+        }
+        #question {
+        width: 80%; /* Set the width of the input box */
+        margin: 10px auto; /* Center the input box horizontally */
+        display: block;
+        }
+
+        #question textarea {
+            width: 100%; /* Set the width of the textarea to 100% */
+            height: 100px; /* Set the height of the textarea */
+            font-size: 1em; /* Adjust font size if needed */
+            resize: none; /* Disable textarea resizing */
+            margin-bottom: 10px; /* Add some space between the textarea and button */
+        }
+
+        #send-button {
+            width: 270px; /* Set the width of the button */
+            height: 80px; /* Set the height of the button */
+            border: none;
+            outline: none;
+            background: #000000;
+            color: #FF8C00;
+            font-size: 22px;
+            border-radius: 40px;
+            text-align: center;
+            box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            margin: 0 auto; /* Center the button horizontally */
+        }
+
+        .answered-box {
+            border: 2px solid orange; /* Add a border around the answered box */
+            padding: 10px; /* Add some padding inside the border */
+            margin-top: 20px; /* Add space between the question-answer and answered box */
+            text-align: center; /* Center the text in the answered box */
+        }
+
+        .answered-question {
+            color: white; /* Set the font color to white */
+            font-size: 1.2em; /* Adjust font size if needed */
+        }
+
+        .answered-answer {
+            color: orange; /* Set the font color to orange */
+            font-size: 1.2em; /* Adjust font size if needed */
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">ChatterDog</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-	     <span class="navbar-toggler-icon"></span>
-	 </button>
-         <div class="collapse navbar-collapse" id="navbarNav">
-             <ul class="navbar-nav">
-	         <li class="nav-item active">
-                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-		</li>
-		<li class="nav-item">
-		    <a class="nav-link" href="/askdog">Ask Dog</a>
-		</li>
-		<li class="nav-item">
-		    <a class="nav-link" href="/chatdog">Talk to Dog</a>
-		</li>
-	    </ul>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav left"> <!-- Align the navbar to the right -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/askdog">Ask Dog</a>
+                </li>
+            </ul>
         </div>
     </nav>
-    {% block content %}
-    <div id="question-answer">
-        <form id="question" action="/askdog" method="post">
-            <legend><strong>Ask a Dog a Question</strong></legend>
-            <fieldset>
-                <input type="text" id="question" name="question" placeholder="Type your question...one at a time please, I'm a dog">
-                <button id="send-button">Send</button>
-            </fieldset>
-        </form>
 
-        <div id="answer-container">
-            {% if prompt and results %}
-                <strong>Your Question:</strong> {{ prompt }}<br>
-                <strong>Answer:</strong> {{ results }}
-            {% endif %}
+        <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Single column for one large central image -->
+                <div class="img-container">
+                    <img src="static/dogimage1.jpeg" class="img-fluid" alt="Large Central Image">
+                </div>
+                <!-- Text and form underneath the image -->
+                <div id="question-answer">
+                    <div id="question">
+                    <form id="question" action="/askdog" method="post">
+                        <legend><strong>Ask Dog a Question</strong></legend>
+                        <fieldset>
+                            <textarea id="question" name="question" placeholder="Type your question...one at a time please, I'm a dog"></textarea>
+                            <button id="send-button">Send</button>
+                        </fieldset>
+                    </form>
+                    </div>
+                    <div id="answer-container">
+                        {% if prompt and results %}
+                            <!-- Check if there is a prompt and results -->
+                            <div class="answered-box">
+                                <div class="answered-question">
+                                    <strong>Your Question:</strong> {{ prompt }}
+                                </div>
+                                <div class="answered-answer">
+                                    <strong>Answer:</strong> {{ results }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -49,7 +150,7 @@
             answerContainer.style.display = 'block';
         {% endif %}
     </script>
-    {% endblock %}
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
