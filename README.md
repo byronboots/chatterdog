@@ -22,7 +22,7 @@ Apart from just general learning of new technologies and basic syntax errors and
 
 ## Accomplishments that I'm proud of
 
-This was my first time building a Flask app that accesses an external API (I've only connected to SQL DBs using Flask previously. Further, this was my first time utilizing Google PaLM or any other AI service as a developer and it was fun to experiment with methods to influence output and also learn how to address some of the common errors I encountered (rejected responses to factual asks etc.). I also hadn't used Google Cloud Run previously and found it very simple to deploy with after experimenting with other dynamic site deployment methods.
+This was my first time building a Flask app that accesses an external API (I've only connected to SQL DBs using Flask previously). Further, this was my first time utilizing Google PaLM or any other AI service as a developer and it was fun to experiment with methods to influence output and also learn how to address some of the common errors I encountered (rejected responses to factual asks etc.). I also hadn't used Google Cloud Run previously and found it very simple to deploy with after experimenting with other dynamic site deployment methods.
 
 ## What I learned
 
